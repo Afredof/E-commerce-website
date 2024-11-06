@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background-color: cornflowerblue;
+    }
+    .right{
+        padding-left: 25%;
+    }
+</style>
+
+<body>
+    {% load static %}
+
+    <head>
+        <link rel="stylesheet" href="{% static 'css/pay.css' %}">
+    </head>
+    <h6 class="text-center">
+        <form action="pay" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <div class="card-container">
+                    <div class="left">
+                        <h1 class="display-3">YOUR ORDERS</h1>
+                        {% for m in cartitems %}
+                        <div class="order-items">
+                            <img src="{{m.product.mnm.url}}">
+                            <div class="item">
+                                <span>
+                                    {{m.product.inm}}
+                                </span>
+                                <input type="text" name="pro" value="{{m.product.mnm}}" hidden>
+                                <span>
+                                    {{m.qty}}
+                                </span>
+                                <input type="text" name="qty" value="{{m.qty}}" hidden>
+                            </div>
+                            <input type="text" name="prc" value="{{m.product.prc}}" hidden>
+                            <span class="item-price">
+                                {{m.product.mpr}}
+                            </span>
+                        </div>
+                        {% endfor %}
+                        <p style="color: rgb(red, green, blue); font-size:25px;">
+                            Total:
+                            <input type="text" readonly value="{{total_price}}" name="tot"
+                                style="border: none; width: 70px; color: rgb(red, green, blue); font-size: 25px;">
+                            Rs/-
+                        </p>
+                    </div>
+                    <h1>Payment</h1>
+                    <div class="right">
+                        
+
+
+
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label"> Payment method</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="payment" id="payment" class="form-label">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Card Holder Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="fn" value="{{user}}" id="fn" class="form-label">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label"> Expiration Date</label>
+                            <div class="col-sm-10">
+                                <input type="date" name="ex" id="ex" class="form-label">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label"> CVV</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="cvv" id="cvv" class="form-label" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="submit">
+                        <button type="submit" class="btn btn-dark">
+                            submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </h6>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

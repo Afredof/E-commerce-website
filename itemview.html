@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    .card{
+        width: 29%;
+        height:550px;
+        float: left;
+        margin-left: 30px;
+        margin-top: 30px;
+        padding: 10px;
+        box-shadow: 2px 2px 5px  5px  rgb(211, 208, 208);
+    }
+    img{
+        width:200px;
+        height:200px;
+    }
+    h3{
+        color: rgb(88, 15, 161);
+        text-align: center;
+        
+    }
+    button{
+        background-color: #241f47;
+        height: 50px;
+        border-radius: 5px;
+        color: rgb(255, 255, 255);
+        margin-left: 40px;
+        padding-right: 30%;
+        padding: 10px 24px;
+        color: aliceblue;
+    }
+</style>
+<body>
+    
+    <h1 style="text-align: center;color:#241f47;" >OUR TOYS</h1>
+    {% for m in card %}
+    <div class ="card">
+        <h1 style="text-align:center ;"> <img src="{{m.img.url}}" ></h1>
+        <h2 style="color: #241f47; text-align:center">{{m.inm}}<h2>
+        <h3 style="text-align:justify">{{m.des}}</h3>
+        <h3>${{m.prc}}</h3>
+            <a href="/addtocart?id={{m.id}}" style="color:241f47">ADD TO CART</a>
+            <a href="viewcart" style="color:241f47" > VIEW CART</a>
+    </div>
+{% endfor %}
+
+    
+</body>
+</html>
